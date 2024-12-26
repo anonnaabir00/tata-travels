@@ -4,7 +4,7 @@ const TataButton = ({ id, prefix, label, onClick, disable, htmlType = "button" }
     return (
         <button
             id={id}
-            className="fhbutton fhbutton--primary"
+            className="tatabutton tatabutton--primary"
             onClick={onClick}
             type={htmlType}
             disabled={disable}

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import './style.css';
 
-const TataDate = ({ header }) => {
-    const [selectedDate, setSelectedDate] = useState(null);
+const TataDate = ({ header, value, onChange }) => {
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
     const [currentMonth, setCurrentMonth] = useState(11); // December (0-indexed)
     const [currentYear, setCurrentYear] = useState(2024);
 
     const handleDateSelect = (date) => {
-        setSelectedDate(date);
+        if (onChange) {
+            onChange(date); // Notify Ant Design Form about the change
+        }
         setIsDatePickerOpen(false);
-        console.log(date);
     };
 
     const daysInMonth = (month, year) => {
@@ -45,21 +45,23 @@ const TataDate = ({ header }) => {
     return (
         <div className="w-full max-w-md mx-auto relative">
             <div
-                className="p-4 bg-white shadow-md rounded-md cursor-pointer flex justify-between items-center"
+                className="tata-date-input bg-white rounded-md cursor-pointer flex justify-between items-center"
                 onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
             >
                 <div>
-                    <h2 className="text-sm text-gray-500 mb-1">{header || "Departure"}</h2>
+                    <div className="flex justify-start">
+                        <img src="../../../includes/assets/calender_icon.svg" alt="Calendar Icon" />
+                        <h2 className="text-sm text-gray-500 mb-1">{header || "Departure"}</h2>
+                    </div>
                     <p className="text-lg font-semibold text-gray-800">
-                        {selectedDate ? new Date(selectedDate).toLocaleDateString(undefined, {
-                            day: '2-digit', month: 'short', year: 'numeric'
-                        }) : "Select a date"}
+                        {value
+                            ? new Date(value).toLocaleDateString(undefined, {
+                                day: '2-digit',
+                                month: 'short',
+                                year: 'numeric',
+                            })
+                            : "Select a date"}
                     </p>
-                </div>
-                <div className="text-gray-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 4h10M5 11h14M5 18h14M7 15h.01M7 21h10m-2-6h.01" />
-                    </svg>
                 </div>
             </div>
 
@@ -100,10 +102,10 @@ const TataDate = ({ header }) => {
                                 key={day}
                                 onClick={() => handleDateSelect(new Date(currentYear, currentMonth, day))}
                                 className={`p-2 rounded-full hover:bg-orange-100 text-center ${
-                                    selectedDate &&
-                                    new Date(selectedDate).getDate() === day &&
-                                    new Date(selectedDate).getMonth() === currentMonth &&
-                                    new Date(selectedDate).getFullYear() === currentYear
+                                    value &&
+                                    new Date(value).getDate() === day &&
+                                    new Date(value).getMonth() === currentMonth &&
+                                    new Date(value).getFullYear() === currentYear
                                         ? "bg-orange-500 text-white"
                                         : "text-gray-800"
                                 }`}

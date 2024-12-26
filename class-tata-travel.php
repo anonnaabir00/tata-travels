@@ -67,6 +67,7 @@ final class TataTravels {
 		TataTravels\Autoload::init();
 		TataTravels\Enqueue::init();
 		TataTravels\Shortcodes::init();
+		TataTravels\Ajax::init();
 	}
 
 	public function load_textdomain() {

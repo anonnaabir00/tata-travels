@@ -1,0 +1,99 @@
+/*Tata Date*/
+
+.tata-date-input {
+    background-color: #F8FAFC;
+    width: 100%;
+    height: auto;
+    border: 1px solid #F8FAFC;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 1rem 1rem;
+}
+
+/* Input Container */
+
+.custom-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+/* Input Field */
+.autocomplete-input {
+    background-color: #F8FAFC;
+    width: 100%;
+    height: 48px;
+    border: 1px solid #F8FAFC;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 8px 17px 8px 12px;
+    /*padding-left: 40px; !* Space for the icon *!*/
+    outline: none;
+}
+
+/* Floating Label */
+.floating-label {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+
+/* Floating Label Active State */
+.floating-label-active {
+    top: 8px;
+    font-size: 12px;
+    color: #ec5b24;
+}
+
+/* Placeholder Styling */
+.autocomplete-input::placeholder {
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* SVG Icon */
+.airplane-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+/* Dropdown Options */
+.location-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.location-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.location-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.location-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.location-description {
+    font-size: 12px;
+    color: #666;
+}
