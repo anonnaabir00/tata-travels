@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Input, Button, Select } from "antd";
+import { Input, Select } from "antd";
+import TataButton from "../../common/controls/TataButton.jsx";
 import TataDate from "../../common/controls/TataDate.jsx";
 import { SwapOutlined } from "@ant-design/icons";
 
@@ -14,6 +15,7 @@ export default function FlightSearch() {
 
     const handleSearch = () => {
         console.log({ from, to, departureDate, travelers, travelClass });
+        window.location.href = "/search-result";
     };
 
     return (
@@ -72,13 +74,10 @@ export default function FlightSearch() {
                     <Option value="First Class">First Class</Option>
                 </Select>
             </div>
-            <Button
-                type="primary"
-                className="w-full"
-                onClick={handleSearch}
-            >
-                Search
-            </Button>
+                <TataButton
+                    label="Search"
+                    onClick={handleSearch}
+                />
             </div>
         </div>
     );
