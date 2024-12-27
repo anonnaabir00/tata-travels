@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  important: true,
   content: [
     "./index.html",
     './src/**/*.jsx',
@@ -7,7 +8,6 @@ export default {
     './includes/templates/**/*.php',
     './parts/**/*.html',
   ],
-  important: '#tt-wrapper',
   theme: {
     extend: {
     },
