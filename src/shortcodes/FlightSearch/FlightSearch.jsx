@@ -33,7 +33,7 @@ export default function FlightSearch() {
 
     const onFinish = (values) => {
         console.log("Form Values:", values);
-        window.location.href = "/search-result";
+        window.location.replace("/new-search-result");
     };
 
     return (
