@@ -1,3 +1,44 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.filters-container {
+    width: 100%;
+    background-color: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filters-header {
+    display: flex;
+    justify-content: space-between;
+    color: #6b7280; /* Gray text */
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.custom-panel {
+    border: 1px solid #e5e7eb; /* Light gray border */
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.custom-panel > .ant-collapse-header {
+    padding: 12px 16px;
+    font-weight: 500;
+    color: #374151; /* Dark gray */
+    background-color: #f9fafb; /* Light background */
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.custom-panel > .ant-collapse-content {
+    padding: 16px;
+    background-color: white;
+}
+
+.custom-panel > .ant-collapse-content > .ant-collapse-content-box {
+    padding: 0;
+}

@@ -17,5 +17,7 @@ export default {
     preflight: false,
     colors: false,
   },
-  plugins: [],
+  plugins: [
+    require('daisyui'),
+  ],
 }
