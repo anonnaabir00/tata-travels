@@ -75,9 +75,6 @@ const FlightDate = () => {
           <span className="text-xs text-gray-500">
             {dates[startIndex] ? formatMonth(dates[startIndex]) : ''}
           </span>
-                    <span className="text-2xl font-semibold">
-            {dates[startIndex]?.getDate()}
-          </span>
                 </div>
 
                 {/* Previous button */}

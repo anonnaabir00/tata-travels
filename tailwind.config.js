@@ -7,6 +7,7 @@ export default {
     './includes/templates/**/*.php',
     './parts/**/*.html',
   ],
+  important: '#tt-wrapper',
   theme: {
     extend: {
     },

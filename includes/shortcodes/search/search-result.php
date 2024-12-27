@@ -19,6 +19,6 @@ class SearchResult {
     			'tt_search_result'
     		);
 
-    		return '<div class="tt-search-result" data-id="' . esc_attr( $unique_key ) . '"></div>';
+    		return '<div id="tt-wrapper" class="tt-search-result" data-id="' . esc_attr( $unique_key ) . '"></div>';
     }
 }
