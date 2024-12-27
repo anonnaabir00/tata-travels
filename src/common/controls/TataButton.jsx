@@ -8,6 +8,12 @@ const TataButton = ({ id, prefix, label, onClick, disable, htmlType = "button" }
             onClick={onClick}
             type={htmlType}
             disabled={disable}
+            style={{
+                width: "100%",
+                height: "20px",
+                borderRadius: "8px",
+                padding: "2.6rem",
+            }}
         >
             {prefix} {label}
         </button>

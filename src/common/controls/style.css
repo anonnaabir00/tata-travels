@@ -2,12 +2,8 @@
 
 .tata-date-input {
     background-color: #F8FAFC;
-    width: 100%;
-    height: auto;
-    border: 1px solid #F8FAFC;
-    border-radius: 4px;
-    font-size: 16px;
-    padding: 1rem 1rem;
+    border: solid 1px #E2E8F0;
+    border-radius: 8px;
 }
 
 /* Input Container */
@@ -96,4 +92,10 @@
 .location-description {
     font-size: 12px;
     color: #666;
+}
+
+/*Tata Button*/
+
+.tatabutton {
+    background-color: #ED7232 !important;
 }

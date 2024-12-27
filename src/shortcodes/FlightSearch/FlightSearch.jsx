@@ -49,9 +49,9 @@ export default function FlightSearch() {
             </div>
             <Form
                 form={form}
-                onFinish={onFinish} // Handles form submission
+                onFinish={onFinish}
                 layout="vertical"
-                className="search-body grid grid-cols-5 gap-6 mb-4"
+                className="search-body grid grid-cols-5 gap-6 items-center"
             >
                 {/* From Location */}
                 <Form.Item
@@ -90,9 +90,7 @@ export default function FlightSearch() {
                 </Form.Item>
 
                 {/* Search Button */}
-                <Form.Item>
-                    <TataButton label="Search" htmlType="submit" />
-                </Form.Item>
+                <TataButton label="Search" htmlType="submit" />
             </Form>
         </div>
     );

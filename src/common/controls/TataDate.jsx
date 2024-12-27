@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import './style.css';
 
-const TataDate = ({ header, value, onChange }) => {
+const TataDate = ({ header = "Departure", value, onChange }) => {
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-    const [currentMonth, setCurrentMonth] = useState(11); // December (0-indexed)
-    const [currentYear, setCurrentYear] = useState(2024);
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+    const [selectedDate, setSelectedDate] = useState(value);
 
     const handleDateSelect = (date) => {
+        setSelectedDate(date);
         if (onChange) {
-            onChange(date); // Notify Ant Design Form about the change
+            onChange(date);
         }
         setIsDatePickerOpen(false);
     };
@@ -17,9 +20,16 @@ const TataDate = ({ header, value, onChange }) => {
         return new Date(year, month + 1, 0).getDate();
     };
 
-    const generateCalendar = () => {
+    const getFirstDayOfMonth = (month, year) => {
+        return new Date(year, month, 1).getDay();
+    };
+
+    const generateCalendarDays = () => {
         const days = daysInMonth(currentMonth, currentYear);
-        return Array.from({ length: days }, (_, index) => index + 1);
+        const firstDay = getFirstDayOfMonth(currentMonth, currentYear);
+        const blanks = Array(firstDay).fill(null);
+        const daysArray = Array.from({ length: days }, (_, i) => i + 1);
+        return [...blanks, ...daysArray];
     };
 
     const handlePreviousMonth = () => {
@@ -40,78 +50,86 @@ const TataDate = ({ header, value, onChange }) => {
         }
     };
 
-    const calendarDays = generateCalendar();
+    const formatDate = (date) => {
+        if (!date) return "Select a date";
+        return new Date(date).toLocaleDateString('en-US', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric'
+        });
+    };
 
     return (
-        <div className="w-full max-w-md mx-auto relative">
+        <div className="relative w-full">
+            {/* Date Display */}
             <div
-                className="tata-date-input bg-white rounded-md cursor-pointer flex justify-between items-center"
+                className="tata-date-input p-3 shadow-sm cursor-pointer"
                 onClick={() => setIsDatePickerOpen(!isDatePickerOpen)}
             >
-                <div>
-                    <div className="flex justify-start">
-                        <img src="../../../includes/assets/calender_icon.svg" alt="Calendar Icon" />
-                        <h2 className="text-sm text-gray-500 mb-1">{header || "Departure"}</h2>
+                <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-gray-500">
+                        <Calendar className="w-4 h-4" />
+                        <span className="text-sm">{header}</span>
                     </div>
-                    <p className="text-lg font-semibold text-gray-800">
-                        {value
-                            ? new Date(value).toLocaleDateString(undefined, {
-                                day: '2-digit',
-                                month: 'short',
-                                year: 'numeric',
-                            })
-                            : "Select a date"}
-                    </p>
+                    <div className="text-xl font-semibold">
+                        {selectedDate ? formatDate(selectedDate) : "Select a date"}
+                    </div>
                 </div>
             </div>
 
+            {/* Calendar Popup */}
             {isDatePickerOpen && (
-                <div className="absolute top-full left-0 w-[30rem] mt-2 p-4 bg-white shadow-md rounded-md z-10">
-                    <div className="flex justify-between items-center mb-4">
+                <div className="absolute top-full left-0 mt-2 p-4 bg-white rounded-lg shadow-lg z-50 w-[320px]">
+                    {/* Calendar Header */}
+                    <div className="flex items-center justify-between mb-4">
                         <button
                             onClick={handlePreviousMonth}
-                            className="p-2 rounded-full hover:bg-gray-100"
+                            className="p-1 rounded-full hover:bg-gray-100"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-                            </svg>
+                            <ChevronLeft className="w-5 h-5" />
                         </button>
-                        <h3 className="text-lg font-semibold">
-                            {new Date(currentYear, currentMonth).toLocaleDateString(undefined, {
+                        <h3 className="text-sm font-medium">
+                            {new Date(currentYear, currentMonth).toLocaleDateString('en-US', {
                                 month: 'long',
-                                year: 'numeric',
+                                year: 'numeric'
                             })}
                         </h3>
                         <button
                             onClick={handleNextMonth}
-                            className="p-2 rounded-full hover:bg-gray-100"
+                            className="p-1 rounded-full hover:bg-gray-100"
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                            </svg>
+                            <ChevronRight className="w-5 h-5" />
                         </button>
                     </div>
-                    <div className="grid grid-cols-7 gap-2">
-                        {["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"].map((day) => (
-                            <div key={day} className="text-sm font-medium text-gray-500 text-center">
+
+                    {/* Calendar Grid */}
+                    <div className="grid grid-cols-7 gap-1">
+                        {/* Weekday Headers */}
+                        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
+                            <div key={day} className="text-xs font-medium text-gray-500 text-center p-2">
                                 {day}
                             </div>
                         ))}
-                        {calendarDays.map((day) => (
-                            <button
-                                key={day}
-                                onClick={() => handleDateSelect(new Date(currentYear, currentMonth, day))}
-                                className={`p-2 rounded-full hover:bg-orange-100 text-center ${
-                                    value &&
-                                    new Date(value).getDate() === day &&
-                                    new Date(value).getMonth() === currentMonth &&
-                                    new Date(value).getFullYear() === currentYear
-                                        ? "bg-orange-500 text-white"
-                                        : "text-gray-800"
-                                }`}
-                            >
-                                {day}
-                            </button>
+
+                        {/* Calendar Days */}
+                        {generateCalendarDays().map((day, index) => (
+                            <div key={index} className="text-center">
+                                {day && (
+                                    <button
+                                        onClick={() => handleDateSelect(new Date(currentYear, currentMonth, day))}
+                                        className={`w-8 h-8 rounded-full text-sm 
+                                            ${selectedDate &&
+                                        new Date(selectedDate).getDate() === day &&
+                                        new Date(selectedDate).getMonth() === currentMonth &&
+                                        new Date(selectedDate).getFullYear() === currentYear
+                                            ? 'bg-orange-500 text-white'
+                                            : 'hover:bg-orange-100'
+                                        }`}
+                                    >
+                                        {day}
+                                    </button>
+                                )}
+                            </div>
                         ))}
                     </div>
                 </div>

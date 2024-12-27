@@ -95,10 +95,10 @@ const TataLocationSearch = ({ title, heading, locations = [], value, onChange })
                             backgroundColor: "#F8FAFC",
                             width: "100%",
                             height: "auto",
-                            border: "1px solid #F8FAFC",
-                            borderRadius: "4px",
+                            border: "1px solid #E2E8F0",
+                            borderRadius: "8px",
                             fontSize: "16px",
-                            padding: "1.5rem 1rem 1.5rem 1rem",
+                            padding: "1.6rem",
                         }}
                     />
                 </div>
