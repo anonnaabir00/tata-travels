@@ -21,7 +21,7 @@ class GetFlights {
 
         // Fetch data from the API using wp_remote_get
         $response = wp_remote_get( $api_url, array(
-                    'timeout' => 60,
+                    'timeout' => 120,
         ) );
 
         // Check for errors in the response

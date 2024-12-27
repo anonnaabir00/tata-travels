@@ -30,7 +30,7 @@ const FlightTabs = ({ smartCard, cheapestCard, quickestCard, allFlights }) => {
         },
     ];
 
-    return <Tabs defaultActiveKey="recommended" items={items} />;
+    return <Tabs defaultActiveKey="all" items={items} />;
 };
 
 export default FlightTabs;
