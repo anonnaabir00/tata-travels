@@ -79,12 +79,12 @@ const TataDate = ({ header = "Departure", value, onChange }) => {
 
             {/* Calendar Popup */}
             {isDatePickerOpen && (
-                <div className="absolute top-full left-0 mt-2 p-4 bg-white rounded-lg shadow-lg z-50 w-[320px]">
+                <div className="tata-date-picker absolute top-full left-0 mt-2 p-4 bg-white rounded-lg shadow-lg z-50 w-[320px]">
                     {/* Calendar Header */}
                     <div className="flex items-center justify-between mb-4">
                         <button
                             onClick={handlePreviousMonth}
-                            className="p-1 rounded-full hover:bg-gray-100"
+                            className="p-1 rounded-full bg-white hover:bg-gray-100"
                         >
                             <ChevronLeft className="w-5 h-5" />
                         </button>
@@ -96,7 +96,7 @@ const TataDate = ({ header = "Departure", value, onChange }) => {
                         </h3>
                         <button
                             onClick={handleNextMonth}
-                            className="p-1 rounded-full hover:bg-gray-100"
+                            className="p-1 rounded-full bg-white hover:bg-gray-100"
                         >
                             <ChevronRight className="w-5 h-5" />
                         </button>

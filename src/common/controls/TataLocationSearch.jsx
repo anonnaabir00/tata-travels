@@ -25,7 +25,9 @@ const TataLocationSearch = ({ title, heading, locations = [], value, onChange })
         <div className="tata-location-search">
             <AutoComplete
                 style={{
-                    width: "100%",
+                    // width: "300px",
+                    position: 'relative',
+                    // zIndex: 99,
                 }}
                 onSearch={handleSearch}
                 onSelect={handleSelect}
@@ -56,7 +58,7 @@ const TataLocationSearch = ({ title, heading, locations = [], value, onChange })
             >
                 {/* Custom HTML Input */}
                 <div className="custom-input-wrapper">
-                    {/* Label and Placeholder */}
+                    {/* Label and Placeholder s*/}
                     {!inputValue && !isFocused && (
                         <label
                             htmlFor="autocomplete-input"
@@ -93,7 +95,7 @@ const TataLocationSearch = ({ title, heading, locations = [], value, onChange })
                         onBlur={() => setIsFocused(false)} // Handle blur
                         style={{
                             backgroundColor: "#F8FAFC",
-                            width: "100%",
+                            width: "220px",
                             height: "auto",
                             border: "1px solid #E2E8F0",
                             borderRadius: "8px",

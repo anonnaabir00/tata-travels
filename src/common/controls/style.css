@@ -6,7 +6,27 @@
     border-radius: 8px;
 }
 
+.tata-date-picker {
+    border-top: solid 5px #ED7232;
+}
+
+.travel-details {
+    background-color: #F8FAFC;
+    border: solid 1px #E2E8F0;
+    border-radius: 8px;
+    margin-top: -1.5rem;
+    padding: 0.8rem;
+}
+
+.travel-details-card {
+    font-size: 1rem;
+}
+
 /* Input Container */
+
+.tata-location-search {
+    margin-top: -2.4rem;
+}
 
 .custom-input-wrapper {
     position: relative;

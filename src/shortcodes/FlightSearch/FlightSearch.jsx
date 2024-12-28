@@ -3,6 +3,8 @@ import { Form } from "antd";
 import TataButton from "../../common/controls/TataButton.jsx";
 import TataDate from "../../common/controls/TataDate.jsx";
 import TataLocationSearch from "../../common/controls/TataLocationSearch.jsx";
+import TravelDetails from "../../common/controls/TravelDetails.jsx";
+import flightArrow from "./assets/flight_arrrow.svg";
 import { SwapOutlined } from "@ant-design/icons";
 
 const locations = [
@@ -39,59 +41,67 @@ export default function FlightSearch() {
     return (
         <div className="p-6 bg-white rounded-md shadow-xl w-full mx-auto">
             <div className="search-header">
-                <div className="flex justify-start mb-4 gap-4 w-2/6">
-                    <button className="w-1/2 py-2 px-4 text-center border-r-2 border-orange-500 font-bold text-orange-500">
-                        One Way
-                    </button>
-                    <button className="w-1/2 py-2 px-4 text-center text-gray-500">
-                        Round Trip
-                    </button>
-                </div>
+
             </div>
             <Form
                 form={form}
                 onFinish={onFinish}
                 layout="vertical"
-                className="search-body grid grid-cols-5 gap-6 items-center"
+                className="search-body flex justify-between gap-6 items-center"
             >
                 {/* From Location */}
-                <Form.Item
-                    name="from"
-                    label="From"
-                    rules={[{ required: true, message: "Please select a departure location" }]}
-                >
-                    <TataLocationSearch heading="From" locations={locations} />
-                </Form.Item>
-
+                <div className="flex w-full mr-4 mt-2">
+                    <div>
+                        <Form.Item
+                            name="from"
+                            rules={[{ required: true, message: "Please select a departure location" }]}
+                        >
+                            <TataLocationSearch heading="From" locations={locations} />
+                        </Form.Item>
+                    </div>
+                <img className='-mt-6' src={flightArrow} />
                 {/* To Location */}
-                <Form.Item
-                    name="to"
-                    label="To"
-                    rules={[{ required: true, message: "Please select a destination" }]}
-                >
-                    <TataLocationSearch heading="To" locations={locations} />
-                </Form.Item>
+                    <div>
+                        <Form.Item
+                            name="to"
+                            rules={[{ required: true, message: "Please select a destination" }]}
+                        >
+                            <TataLocationSearch heading="To" locations={locations} />
+                        </Form.Item>
+                    </div>
+                </div>
 
                 {/* Departure Date */}
-                <Form.Item
-                    name="departureDate"
-                    label="Departure Date"
-                    rules={[{ required: true, message: "Please select a departure date" }]}
-                >
-                    <TataDate />
-                </Form.Item>
+                <div className="w-full">
+                    <Form.Item
+                        name="departureDate"
+                        rules={[{ required: true, message: "Please select a departure date" }]}
+                    >
+                        <TataDate />
+                    </Form.Item>
+                </div>
 
+                <div className="w-full">
                 {/* Return Date */}
                 <Form.Item
                     name="returnDate"
-                    label="Return Date"
                     rules={[{ required: false }]} // Optional
                 >
                     <TataDate />
                 </Form.Item>
+                </div>
+
+                <TravelDetails
+                    travellers={{ adults: 2, children: 0, infants: 1 }}
+                    className="my-4"
+                    travelClass="Economy"
+                    onTravelClassChange={(travelClass) => console.log('Travel class changed:', travelClass)}
+                />
 
                 {/* Search Button */}
-                <TataButton label="Search" htmlType="submit" />
+                <div className="w-full -mt-5">
+                    <TataButton label="Search" htmlType="submit" />
+                </div>
             </Form>
         </div>
     );
