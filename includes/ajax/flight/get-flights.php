@@ -15,9 +15,16 @@ class GetFlights {
 
 	public function get_flights() {
         check_ajax_referer( 'tt_nonce' );
+        $leave_date = $_POST['additionalParams']['departureDate'];
 
         // Define the API endpoint
-        $api_url = "https://ixigo-api.onrender.com/fetch/flights";
+
+        $api_url = add_query_arg(
+                array(
+                    'leaveDate' => $leave_date,
+                ),
+                'https://ixigo-api.onrender.com/fetch/flights'
+        );
 
         // Fetch data from the API using wp_remote_get
         $response = wp_remote_get( $api_url, array(

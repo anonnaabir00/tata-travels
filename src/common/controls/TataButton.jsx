@@ -1,4 +1,5 @@
 import './style.css';
+import { CircleArrowRight } from 'lucide-react';
 
 const TataButton = ({ id, prefix, label, onClick, disable, htmlType = "button" }) => {
     return (
@@ -13,9 +14,10 @@ const TataButton = ({ id, prefix, label, onClick, disable, htmlType = "button" }
                 height: "20px",
                 borderRadius: "8px",
                 padding: "2.6rem",
+                fontSize: "16px"
             }}
         >
-            {prefix} {label}
+            {prefix} {label} <div className="ml-2 mt-1.5"><CircleArrowRight size={16} /></div>
         </button>
     );
 };

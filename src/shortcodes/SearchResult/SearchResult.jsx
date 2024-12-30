@@ -1,4 +1,3 @@
-// SearchResult.jsx
 import React, { useEffect, useState } from "react";
 import { Spin } from "antd";
 import { fetchData } from "../../services/fetchData.js";
@@ -18,6 +17,14 @@ export default function SearchResult() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const departureDate = urlParams.get('departureDate');
+
+        // Create additional parameters object
+        const additionalParams = {
+            departureDate,
+        };
+
         const fetchFlights = () => {
             fetchData(
                 "tt/flight/fetch",
@@ -49,7 +56,7 @@ export default function SearchResult() {
                     }
                     setLoading(false);
                 },
-                {}
+                {additionalParams}
             );
         };
 

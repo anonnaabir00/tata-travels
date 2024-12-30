@@ -34,8 +34,29 @@ export default function FlightSearch() {
     const [form] = Form.useForm();
 
     const onFinish = (values) => {
-        console.log("Form Values:", values);
-        window.location.replace("/new-search-result");
+         console.log("Form Values:", values);
+        // Convert ISO string to Date object and format it
+        const formatDate = (dateString) => {
+            const date = new Date(dateString);
+            const day = date.getDate().toString().padStart(2, '0');
+            const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-based
+            const year = date.getFullYear();
+            return `${day}${month}${year}`;
+        };
+
+        const leaveDate = formatDate(values.departureDate);
+        const returnDate = values.returnDate ? formatDate(values.returnDate) : null;
+
+
+        const queryParams = new URLSearchParams({
+            from: values.from,
+            to: values.to,
+            departureDate: leaveDate,
+            returnDate: returnDate
+        }).toString();
+
+        window.location.replace(`/search-result?${queryParams}`);
+
     };
 
     return (
