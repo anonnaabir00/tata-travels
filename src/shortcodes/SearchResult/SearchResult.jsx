@@ -13,6 +13,7 @@ export default function SearchResult() {
         fastest: null,
         recommended: null
     });
+    const [flightFilter, setflightFilter] = useState(null)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -30,9 +31,11 @@ export default function SearchResult() {
                 "tt/flight/fetch",
                 (response) => {
                     if (response.success) {
-                        console.log(response)
+                        // console.log(response)
                         try {
-                            const flightData = response.data?.flight_journeys?.flightFare || [];
+                            // const flightData = response.data?.flight_journeys?.flightFare || [];
+                            const flightData = response.data?.flight_details?.fare || [];
+                            setflightFilter(response.data?.trip_filter);
 
                             // Find special flights
                             const cheapestFlight = flightData.find(flight => flight.chips === "CHEAPEST");
@@ -64,26 +67,52 @@ export default function SearchResult() {
     }, []);
 
     if (loading) return <div className="flex justify-center items-center h-screen"><Spin size="large" /></div>;
-    if (error) return <div>Error loading flights: {error}</div>;
+
+    if (error)
+        return (
+            <div>
+                <div className="flex justify-between gap-6">
+                        <FlightFilters/>
+                    <div className="w-full">
+                        <FlightDate/>
+                        No Flights Found
+                    </div>
+                </div>
+            </div>
+        );
 
     // Create flight card component with provided data
     const createFlightCard = (flightData) => (
         <FlightCard
-            key={flightData.flightKeys}
-            airlineName={flightData.flightDetails[0].headerTextWeb}
-            flightNumber={flightData.flightDetails[0].subHeaderTextWeb}
-            price={flightData.fares[0].fareDetails.displayFare}
-            duration={flightData.flightDetails[0].duration.text}
-            departureTime={flightData.flightDetails[0].departureTime}
-            arrivalTime={flightData.flightDetails[0].arrivalTime}
-            origin={flightData.flightDetails[0].origin}
-            destination={flightData.flightDetails[0].destination}
-            stops={flightData.flightDetails[0].stopText}
-            offerText={flightData.fares[0].offerText}
-            isFreeMeal={flightData.isFreeMealAvailable}
-            cabinClass={flightData.fares[0].fareMetadata[0].cabinClass}
-            baggageInfo={flightData.fares[0].fareMetadata[0].baggageDetails}
+            airlineName={flightData.headerText}
+            flightNumber={flightData.subHeaderTextWeb}
+            price={flightData.displayFare}
+            duration={flightData.duration.hour}
+            departureTime={flightData.departureTime}
+            arrivalTime={flightData.arrivalTime}
+            origin={flightData.origin}
+            destination={flightData.destination}
+            stops={flightData.stopText}
+            offerText={flightData.offerText}
+            isFreeMeal={flightData.fareDetails.isFreeMealAvailable}
+            cabinClass={flightData.cabinClass}
+            baggageInfo={flightData.fareDetails.checkInBaggage}
             chips={flightData.chips}
+            // key={flightData.flightKeys}
+            // airlineName={flightData.flightDetails[0].headerTextWeb}
+            // flightNumber={flightData.flightDetails[0].subHeaderTextWeb}
+            // price={flightData.fares[0].fareDetails.displayFare}
+            // duration={flightData.flightDetails[0].duration.text}
+            // departureTime={flightData.flightDetails[0].departureTime}
+            // arrivalTime={flightData.flightDetails[0].arrivalTime}
+            // origin={flightData.flightDetails[0].origin}
+            // destination={flightData.flightDetails[0].destination}
+            // stops={flightData.flightDetails[0].stopText}
+            // offerText={flightData.fares[0].offerText}
+            // isFreeMeal={flightData.isFreeMealAvailable}
+            // cabinClass={flightData.fares[0].fareMetadata[0].cabinClass}
+            // baggageInfo={flightData.fares[0].fareMetadata[0].baggageDetails}
+            // chips={flightData.chips}
         />
     );
 
@@ -98,7 +127,14 @@ export default function SearchResult() {
     return (
         <div>
             <div className="flex justify-between gap-6">
-                <FlightFilters />
+                <div className="w-2/6">
+                    <FlightFilters
+                        totalFlights={flightFilter.total_flights}
+                        maxPrice={flightFilter.maxPrice}
+                        minPrice={flightFilter.minPrice}
+                        stops={flightFilter.stopsFilter}
+                    />
+                </div>
                 <div className="w-full">
                     <FlightDate />
                     <FlightTabs

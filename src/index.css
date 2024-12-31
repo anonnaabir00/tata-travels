@@ -6,36 +6,31 @@
 .filters-container {
     width: 100%;
     background-color: white;
-    padding: 16px;
-    border-radius: 8px;
+    border-radius: 6px;
+    border: 1px solid #E2E8F0;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.filters-header {
-    display: flex;
-    justify-content: space-between;
-    color: #6b7280; /* Gray text */
-    font-size: 14px;
-    margin-bottom: 16px;
+.filters-flights {
+    background-color: #F8FAFC;
+    color: #ED7232;
+    text-transform: capitalize;
+    font-weight: 600;
+    padding: 0.7rem;
 }
 
 .custom-panel {
-    border: 1px solid #e5e7eb; /* Light gray border */
-    border-radius: 8px;
-    margin-bottom: 16px;
     overflow: hidden;
 }
 
 .custom-panel > .ant-collapse-header {
-    padding: 12px 16px;
+    padding: 0.5rem;
     font-weight: 500;
-    color: #374151; /* Dark gray */
-    background-color: #f9fafb; /* Light background */
-    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
 }
 
 .custom-panel > .ant-collapse-content {
-    padding: 16px;
+    padding: 0rem 1rem 1rem 1rem;
     background-color: white;
 }
 
