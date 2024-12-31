@@ -24,8 +24,9 @@
 }
 
 .custom-panel > .ant-collapse-header {
+    font-size: 1rem;
     padding: 0.5rem;
-    font-weight: 500;
+    font-weight: 600;
     color: #374151;
 }
 

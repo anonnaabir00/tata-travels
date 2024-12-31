@@ -85,7 +85,7 @@ const FlightFilters = ({ totalFlights, maxPrice, minPrice, stops }) => {
                             <label key={stop} className="flex items-center space-x-2">
                                 <input
                                     type="checkbox"
-                                    className="rounded border-gray-300"
+                                    className="rounded border-gray-300 w-4 h-4"
                                     checked={filters.stops.includes(stop)}
                                     onChange={(e) => handleStopsChange(stop, e.target.checked)}
                                 />
@@ -119,23 +119,25 @@ const FlightFilters = ({ totalFlights, maxPrice, minPrice, stops }) => {
                 <Panel header="Time" key="time" className="custom-panel">
                     <div className="space-y-2">
                         {timeSlots.map((slot) => (
-                            <label key={slot.id} className="flex items-center space-x-3">
+                            <label key={slot.id} className="flex justify-between items-center space-x-3">
+                                <div className="flex items-start space-x-2">
+                                    <div className="filter-day-image">
+                                        <img
+                                            src={slot.image}
+                                            className="w-4 h-4"
+                                        />
+                                    </div>
+                                    <div>
+                                        <div className="font-semibold">{slot.label}</div>
+                                        <div className="text-xs text-gray-500">{slot.subLabel}</div>
+                                    </div>
+                                </div>
                                 <input
                                     type="checkbox"
-                                    className="rounded border-gray-300"
+                                    className="rounded border-gray-600 w-4 h-4"
                                     checked={filters.timeSlots.includes(slot.id)}
                                     onChange={(e) => handleTimeSlotChange(slot.id, e.target.checked)}
                                 />
-                                <div className="filter-day-image">
-                                    <img
-                                        src={slot.image}
-                                        className="w-4 h-4"
-                                    />
-                                </div>
-                                <div>
-                                    <div>{slot.label}</div>
-                                    <div className="text-xs text-gray-500">{slot.subLabel}</div>
-                                </div>
                             </label>
                         ))}
                     </div>
