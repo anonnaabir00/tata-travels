@@ -84,7 +84,9 @@ export default function SearchResult() {
             offerText={flightData.offerText}
             isFreeMeal={flightData.fareDetails.isFreeMealAvailable}
             cabinClass={flightData.cabinClass}
-            baggageInfo={flightData.fareDetails.checkInBaggage}
+            checkInBaggage={flightData.fareDetails.checkInBaggage}
+            handBaggage={flightData.fareDetails.handBaggage}
+            seatRemaining={flightData.fareDetails.seatRemaining}
             chips={flightData.chips}
         />
     );

@@ -16,8 +16,10 @@ const FlightCard = ({
                         stops,
                         offerText,
                         isFreeMealAvailable,
-                        fareMetadata,
-                        flightDetails,
+                        checkInBaggage,
+                        cabinClass,
+                        seatRemaining,
+                        handBaggage,
                         refundableType,
                         fareType,
                         chips
@@ -114,76 +116,47 @@ const FlightCard = ({
                         <div className="border-t border-gray-200 p-4 bg-gray-50">
                             <div className="space-y-4">
                                 {/* Fare Type and Refund Policy */}
-                                <div className="flex justify-between text-sm">
-                                    <div>
+                                <div className="">
+                                    <div className="flex justify-between">
                                         <p className="font-medium text-gray-900">Fare Type</p>
                                         <p className="text-gray-600">{fareType || 'Regular Fare'}</p>
                                     </div>
-                                    <div className="text-right">
+
+                                    <div className="flex justify-between">
                                         <p className="font-medium text-gray-900">Refund Type</p>
                                         <p className="text-gray-600">
                                             {refundableType?.replace(/_/g, ' ') || 'Non Refundable'}
                                         </p>
                                     </div>
-                                </div>
 
-                                {/* Flight Details Table */}
-                                <div className="border rounded-lg overflow-hidden">
-                                    <table className="w-full text-sm">
-                                        <thead className="bg-gray-100">
-                                        <tr>
-                                            <th className="px-4 py-2 text-left text-gray-600">Flight</th>
-                                            <th className="px-4 py-2 text-left text-gray-600">Departure</th>
-                                            <th className="px-4 py-2 text-left text-gray-600">Arrival</th>
-                                            <th className="px-4 py-2 text-left text-gray-600">Duration</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {flightDetails && flightDetails.map((flight, index) => (
-                                            <tr key={index} className="border-t">
-                                                <td className="px-4 py-3">
-                                                    <div>
-                                                        <p className="font-medium">{flight.headerTextWeb}</p>
-                                                        <p className="text-gray-500">{flight.subHeaderTextWeb}</p>
-                                                    </div>
-                                                </td>
-                                                <td className="px-4 py-3">
-                                                    <div>
-                                                        <p className="font-medium">{flight.departureTime}</p>
-                                                        <p className="text-gray-500">{flight.origin}</p>
-                                                    </div>
-                                                </td>
-                                                <td className="px-4 py-3">
-                                                    <div>
-                                                        <p className="font-medium">{flight.arrivalTime}</p>
-                                                        <p className="text-gray-500">{flight.destination}</p>
-                                                    </div>
-                                                </td>
-                                                <td className="px-4 py-3">
-                                                    <p>{flight.duration.text}</p>
-                                                </td>
-                                            </tr>
-                                        ))}
-                                        </tbody>
-                                    </table>
-                                </div>
 
-                                {/* Baggage Information */}
-                                {fareMetadata && fareMetadata[0] && (
-                                    <div>
-                                        <h3 className="font-medium text-gray-900 mb-2">Baggage Information</h3>
-                                        <div className="grid grid-cols-2 gap-4 text-sm">
-                                            <div>
-                                                <p className="text-gray-600">Cabin Baggage</p>
-                                                <p>{fareMetadata[0].baggageDetails.handBaggage}</p>
-                                            </div>
-                                            <div>
-                                                <p className="text-gray-600">Check-in Baggage</p>
-                                                <p>{fareMetadata[0].baggageDetails.checkInBaggage}</p>
-                                            </div>
-                                        </div>
+                                    <div className="flex justify-between">
+                                        <p className="font-medium text-gray-900">Cabin Class</p>
+                                        <p className="text-gray-600">{cabinClass}</p>
                                     </div>
-                                )}
+
+                                    <div className="flex justify-between">
+                                        <p className="font-medium text-gray-900">Check In Baggage</p>
+                                        <p className="text-gray-600 text-right">{checkInBaggage}</p>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <p className="font-medium text-gray-900">Hand Baggage</p>
+                                        <p className="text-gray-600">{handBaggage}</p>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <p className="font-medium text-gray-900">Seat Remaining</p>
+                                        <p className="text-gray-600">{seatRemaining}</p>
+                                    </div>
+
+                                    <div className="flex justify-between">
+                                        <p className="font-medium text-gray-900">Free Meal Available</p>
+                                        <p className="text-gray-600">{!!isFreeMealAvailable ? 'yes' : 'no'}</p>
+                                    </div>
+
+
+                                </div>
                             </div>
                         </div>
                     </Drawer>
