@@ -5,23 +5,24 @@ import FlightCard from "./components/FlightCard.jsx";
 import FlightTabs from "./components/FlightTabs.jsx";
 import FlightDate from "./components/FlightDate.jsx";
 import FlightFilters from "./components/FlightFilters.jsx";
+import useFlightStore from "../../flightStore.js";
 
 export default function SearchResult() {
-    const [flights, setFlights] = useState({
-        all: [],
-        cheapest: null,
-        fastest: null,
-        recommended: null
-    });
-    const [flightFilter, setflightFilter] = useState(null)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [flightFilter, setFlightFilter] = useState(null);
+
+    // Get store actions and state
+    const {
+        initializeFlights,
+        filteredFlights,
+        flights
+    } = useFlightStore();
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const departureDate = urlParams.get('departureDate');
 
-        // Create additional parameters object
         const additionalParams = {
             departureDate,
         };
@@ -31,26 +32,12 @@ export default function SearchResult() {
                 "tt/flight/fetch",
                 (response) => {
                     if (response.success) {
-                        // console.log(response)
                         try {
-                            // const flightData = response.data?.flight_journeys?.flightFare || [];
                             const flightData = response.data?.flight_details?.fare || [];
-                            setflightFilter(response.data?.trip_filter);
+                            setFlightFilter(response.data?.trip_filter);
 
-                            // Find special flights
-                            const cheapestFlight = flightData.find(flight => flight.chips === "CHEAPEST");
-                            const fastestFlight = flightData.find(flight => flight.chips === "FASTEST");
-                            // For recommended, use the highest recommended rating
-                            const recommendedFlight = flightData.reduce((prev, current) =>
-                                (current.sort.recommended > prev.sort.recommended) ? current : prev
-                            );
-
-                            setFlights({
-                                all: flightData, // Store all flights
-                                cheapest: cheapestFlight,
-                                fastest: fastestFlight,
-                                recommended: recommendedFlight
-                            });
+                            // Initialize the store with flight data
+                            initializeFlights(flightData);
                         } catch (err) {
                             setError("Failed to parse flight data.");
                         }
@@ -72,7 +59,7 @@ export default function SearchResult() {
         return (
             <div>
                 <div className="flex justify-between gap-6">
-                        <FlightFilters/>
+                    <FlightFilters/>
                     <div className="w-full">
                         <FlightDate/>
                         No Flights Found
@@ -84,6 +71,7 @@ export default function SearchResult() {
     // Create flight card component with provided data
     const createFlightCard = (flightData) => (
         <FlightCard
+            key={flightData.id} // Add a unique key if available
             airlineName={flightData.headerText}
             flightNumber={flightData.subHeaderTextWeb}
             price={flightData.displayFare}
@@ -98,41 +86,33 @@ export default function SearchResult() {
             cabinClass={flightData.cabinClass}
             baggageInfo={flightData.fareDetails.checkInBaggage}
             chips={flightData.chips}
-            // key={flightData.flightKeys}
-            // airlineName={flightData.flightDetails[0].headerTextWeb}
-            // flightNumber={flightData.flightDetails[0].subHeaderTextWeb}
-            // price={flightData.fares[0].fareDetails.displayFare}
-            // duration={flightData.flightDetails[0].duration.text}
-            // departureTime={flightData.flightDetails[0].departureTime}
-            // arrivalTime={flightData.flightDetails[0].arrivalTime}
-            // origin={flightData.flightDetails[0].origin}
-            // destination={flightData.flightDetails[0].destination}
-            // stops={flightData.flightDetails[0].stopText}
-            // offerText={flightData.fares[0].offerText}
-            // isFreeMeal={flightData.isFreeMealAvailable}
-            // cabinClass={flightData.fares[0].fareMetadata[0].cabinClass}
-            // baggageInfo={flightData.fares[0].fareMetadata[0].baggageDetails}
-            // chips={flightData.chips}
         />
     );
 
-    // Create cards for special categories
-    const smartFlightCard = flights.recommended && createFlightCard(flights.recommended);
-    const cheapestFlightCard = flights.cheapest && createFlightCard(flights.cheapest);
-    const quickestFlightCard = flights.fastest && createFlightCard(flights.fastest);
+    // Use filtered flights for all cards
+    const allFlightCards = filteredFlights.map(flight => createFlightCard(flight));
 
-    // Create cards for all flights
-    const allFlightCards = flights.all.map(flight => createFlightCard(flight));
+    // Find special flights from filtered results
+    const cheapestFlight = filteredFlights.find(flight => flight.chips === "CHEAPEST");
+    const fastestFlight = filteredFlights.find(flight => flight.chips === "FASTEST");
+    const recommendedFlight = filteredFlights.reduce((prev, current) =>
+        (current.sort.recommended > prev.sort.recommended) ? current : prev
+    );
+
+    // Create cards for special categories
+    const smartFlightCard = recommendedFlight && createFlightCard(recommendedFlight);
+    const cheapestFlightCard = cheapestFlight && createFlightCard(cheapestFlight);
+    const quickestFlightCard = fastestFlight && createFlightCard(fastestFlight);
 
     return (
         <div>
             <div className="flex justify-between gap-6">
                 <div className="w-2/6">
                     <FlightFilters
-                        totalFlights={flightFilter.total_flights}
-                        maxPrice={flightFilter.maxPrice}
-                        minPrice={flightFilter.minPrice}
-                        stops={flightFilter.stopsFilter}
+                        totalFlights={filteredFlights.length} // Use filtered length
+                        maxPrice={flightFilter?.maxPrice}
+                        minPrice={flightFilter?.minPrice}
+                        stops={flights} // Pass all flights for filtering
                     />
                 </div>
                 <div className="w-full">
