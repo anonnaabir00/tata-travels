@@ -11,22 +11,52 @@ const locations = [
     {
         title: "New Delhi, Delhi, India",
         description: "Indira Gandhi Intl Airport",
-        image: "https://via.placeholder.com/50?text=DEL",
+        airportCode: 'DEL'
     },
     {
         title: "Mumbai, Maharashtra, India",
         description: "Chhatrapati Shivaji International Airport",
-        image: "https://via.placeholder.com/50?text=BOM",
+        airportCode: 'BOM'
     },
     {
         title: "Hyderabad, Telangana, India",
         description: "Rajiv Gandhi International Airport",
-        image: "https://via.placeholder.com/50?text=HYD",
+        airportCode: 'HYD'
     },
     {
         title: "Bengaluru, Karnataka, India",
         description: "Kempegowda International airport",
-        image: "https://via.placeholder.com/50?text=BLR",
+        airportCode: 'BLR'
+    },
+    {
+        title: "Chennai, Tamil Nadu, India",
+        description: "Chennai International Airport",
+        airportCode: 'MAA'
+    },
+    {
+        title: "Goa, Goa, India",
+        description: "Dabolim Airport",
+        airportCode: 'GOI'
+    },
+    {
+        title: "Dubai, United Arab Emirates",
+        description: "Dubai International Airport",
+        airportCode: 'DXB'
+    },
+    {
+        title: "Singapore, Singapore",
+        description: "Changi",
+        airportCode: 'SIN'
+    },
+    {
+        title: "Bangkok, Bangkok, Thailand",
+        description: "Suvarnabhumi Airport",
+        airportCode: 'BKK'
+    },
+    {
+        title: "Kuala Lumpur, Kuala Lumpur, Malaysia",
+        description: "Kuala Lumpur Intl",
+        airportCode: 'KUL'
     },
 ];
 
@@ -80,7 +110,7 @@ export default function FlightSearch() {
                             <TataLocationSearch heading="From" locations={locations} />
                         </Form.Item>
                     </div>
-                <img className='-mt-6' src={flightArrow} />
+                <img className='location-joiner -mt-3' src={flightArrow} />
                 {/* To Location */}
                     <div>
                         <Form.Item
@@ -93,23 +123,13 @@ export default function FlightSearch() {
                 </div>
 
                 {/* Departure Date */}
-                <div className="w-full">
+                <div className="w-3/5">
                     <Form.Item
                         name="departureDate"
                         rules={[{ required: true, message: "Please select a departure date" }]}
                     >
                         <TataDate />
                     </Form.Item>
-                </div>
-
-                <div className="w-full">
-                {/* Return Date */}
-                <Form.Item
-                    name="returnDate"
-                    rules={[{ required: false }]} // Optional
-                >
-                    <TataDate />
-                </Form.Item>
                 </div>
 
                 <TravelDetails
@@ -120,7 +140,7 @@ export default function FlightSearch() {
                 />
 
                 {/* Search Button */}
-                <div className="w-full -mt-5">
+                <div className="w-3/5 -mt-5">
                     <TataButton label="Search" htmlType="submit" />
                 </div>
             </Form>

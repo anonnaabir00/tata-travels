@@ -5,6 +5,7 @@ import './index.css'
 
 import FlightSearch from "./shortcodes/FlightSearch/FlightSearch.jsx";
 import SearchResult from "./shortcodes/SearchResult/SearchResult.jsx";
+import SearchTab from "./shortcodes/SearchTab/SearchTab.jsx";
 
 const flightSearch = document.querySelectorAll('.tt-flight-search');
 flightSearch.forEach(element => {
@@ -48,5 +49,15 @@ searchResult.forEach(element => {
             <SearchResult dataKey={key} />
         </StrictMode>
         </ConfigProvider>
+    );
+});
+
+const searchTab = document.querySelectorAll('.tt-search-tab');
+searchTab.forEach(element => {
+    const key = element.getAttribute('data-key');
+    createRoot(element).render(
+        <StrictMode>
+            <SearchTab dataKey={key} />
+        </StrictMode>,
     );
 });

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AutoComplete } from "antd";
+import flightIcon from "./assets/flight-icon.png";
 import "./style.css";
 
 const TataLocationSearch = ({ title, heading, locations = [], value, onChange }) => {
@@ -39,11 +40,14 @@ const TataLocationSearch = ({ title, heading, locations = [], value, onChange })
                     value: location.title,
                     label: (
                         <div className="location-item">
-                            <img
-                                src={location.image}
-                                alt={location.title}
-                                className="location-image"
-                            />
+                            {/*<img*/}
+                            {/*    src={location.image}*/}
+                            {/*    alt={location.title}*/}
+                            {/*    className="location-image"*/}
+                            {/*/>*/}
+                            <div className="location-code">
+                                {location.airportCode}
+                            </div>
                             <div className="location-details">
                                 <h5 className="location-title">
                                     {location.title}
@@ -68,20 +72,7 @@ const TataLocationSearch = ({ title, heading, locations = [], value, onChange })
                                 <div>Enter Origin</div>
                                 <div>
                                     <span className="font-bold text-xl">{heading}</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        strokeWidth={1.5}
-                                        stroke="#ec5b24"
-                                        className="airplane-icon"
-                                    >
-                                        <path
-                                            strokeLinecap="round"
-                                            strokeLinejoin="round"
-                                            d="M10.5 21h3m-6.75 0h10.5a2.25 2.25 0 002.25-2.25V16.5m0-6.75L21 12m-3.75-2.25V16.5m0 0l-3.75-2.25M3 16.5l3.75 2.25m-3.75-6.75v3.75M10.5 21l3.75-2.25"
-                                        />
-                                    </svg>
+                                    <img className="ml-2 -mt-2" src={flightIcon}/>
                                 </div>
                             </div>
                         </label>
@@ -101,6 +92,7 @@ const TataLocationSearch = ({ title, heading, locations = [], value, onChange })
                             borderRadius: "8px",
                             fontSize: "16px",
                             padding: "1.6rem",
+                            fontWeight: "800"
                         }}
                     />
                 </div>

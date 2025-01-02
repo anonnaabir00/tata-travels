@@ -45,3 +45,80 @@
     border-radius: 4px;
     border: 1px solid #FBDDCE;
 }
+
+/*Search Tab Style*/
+
+.tabs {
+    display: inline-flex;
+    background: #f3f4f6;
+    padding: 2px;
+    border-radius: 999px;
+    gap: 2px;
+}
+
+.tab {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 999px;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.tab:hover {
+    color: #374151;
+}
+
+.tab.active {
+    background: white;
+    color: #111827;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/*Location Search Joiner*/
+
+.location-joiner {
+    width: 46px;
+    height: 46px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 7px 10px 7px 10px;
+    box-sizing: border-box;
+    border: 1px solid rgb(226, 232, 240);
+    border-radius: 8px;
+    background: #ffffff;
+    z-index: 99;
+}
+
+/*Autocomplete Dropdown*/
+
+.ant-select-dropdown {
+    width: 450px !important;
+    height: 300px !important;
+    top: 27rem !important;
+    box-sizing: border-box;
+    border-top: 4px solid rgb(237, 114, 50);
+    border-radius: 0px 6px 6px 6px;
+    box-shadow: 0px 20px 25px -5px rgba(15, 23, 42, 0.1),0px 10px 10px 0px rgba(15, 23, 42, 0.05);
+    background-color: #ffffff;
+}
+
+.location-code {
+    width: 68px;
+    height: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 16px;
+    box-sizing: border-box;
+    border: 1px solid rgba(237, 114, 50, 0.2);
+    border-radius: 6px;
+    background: rgba(237, 114, 50, 0.05);
+    font-weight: 600;
+    font-size: 20px;
+    color: #ED7232;
+}
