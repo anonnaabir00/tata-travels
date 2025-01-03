@@ -26,7 +26,7 @@ const SearchTab = () => {
                .custom-tabs .ant-tabs-nav {
                    background: #f3f4f6;
                    border-radius: 9px;
-                   margin-bottom: 1rem; 
+                   margin-bottom: 3rem; 
                    width: 260px;
                    height: 40px;
                    display: flex;

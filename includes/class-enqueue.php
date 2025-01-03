@@ -15,7 +15,7 @@ class Enqueue {
 
 	public function tt_assets() {
 			wp_enqueue_style( 'tt-style', TT_ROOT_DIR_URL . 'includes/assets/build/frontend.css' );
-			wp_enqueue_script( 'tt-script', TT_ROOT_DIR_URL . 'includes/assets/build/frontend.js', 'jquery', '1.0.2', true );
+			wp_enqueue_script( 'tt-script', TT_ROOT_DIR_URL . 'includes/assets/build/frontend.js', 'jquery', '1.0.3', true );
 			wp_localize_script(
 				'tt-script',
 				'tt_settings',
