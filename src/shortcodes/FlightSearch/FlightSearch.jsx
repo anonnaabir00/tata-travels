@@ -90,7 +90,7 @@ export default function FlightSearch() {
     };
 
     return (
-        <div className="p-6 bg-white rounded-md shadow-xl w-full mx-auto">
+        <div className="rounded-md w-full mx-auto">
             <div className="search-header">
 
             </div>
@@ -140,7 +140,7 @@ export default function FlightSearch() {
                 />
 
                 {/* Search Button */}
-                <div className="w-3/5 -mt-5">
+                <div className="w-3/6 -mt-5">
                     <TataButton label="Search" htmlType="submit" />
                 </div>
             </Form>

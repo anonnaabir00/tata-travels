@@ -90,7 +90,7 @@ export default function FlightSearchRound() {
     };
 
     return (
-        <div className="p-6 bg-white rounded-md shadow-xl w-full mx-auto">
+        <div className="rounded-md w-full mx-auto">
             <div className="search-header">
 
             </div>
