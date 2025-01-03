@@ -3,10 +3,12 @@ import { CircleArrowRight, Clock, Plane, Lock, ChevronDown } from 'lucide-react'
 import flightpath from "./assets/flight_path.png";
 import {Button, Modal, Drawer } from "antd";
 import flightArrow from "../../FlightSearch/assets/flight_arrrow.svg";
+import copyIcon from "./assets/copy_icon.svg";
 
 const FlightCard = ({
                         airlineName,
                         flightNumber,
+                        airlineImage,
                         price,
                         duration,
                         departureTime,
@@ -55,11 +57,22 @@ const FlightCard = ({
                 {/* Top Part */}
                 <div className="flex items-start justify-between p-6 pb-0">
                     {/* Left section - Airline and flight details */}
-                    <div className="flex flex-col items-center">
-                        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                            <span className="text-lg font-bold text-blue-600">{airlineName.slice(0, 2)}</span>
+                    <div className="flex flex-col justify-start items-center">
+                        <div className="w-12 h-12 rounded-lg flex items-center justify-center">
+                            {airlineImage ? (
+                                <img
+                                    className=""
+                                    src={airlineImage}
+                                    onError={(e) => e.target.style.display = 'none'}
+                                    alt={airlineName}
+                                />
+                            ) : (
+                                <div className="bg-blue-100">
+                                    <span className="text-lg font-bold text-blue-600">{airlineName.slice(0, 2)}</span>
+                                </div>
+                            )}
                         </div>
-                        <p className="text-sm text-gray-600">{flightNumber}</p>
+                        <p className="text-sm text-black">{flightNumber}</p>
                     </div>
 
                     {/* Middle section - Flight info */}
@@ -82,20 +95,23 @@ const FlightCard = ({
 
                     {/* Right section - Price and Offer */}
                     <div>
-                        <p className="text-2xl font-bold mb-2">₹{price.toLocaleString()}</p>
+                        <p className="text-2xl font-bold mb-2 text-right">₹{price.toLocaleString()}</p>
                         {offerText && (
-                                <div className="text-green-500 text-sm mb-2" dangerouslySetInnerHTML={{ __html: offerText }} />
+                            <div className="flex gap-2 items-center">
+                                <div className="text-green-500 text-sm" dangerouslySetInnerHTML={{__html: offerText}}/>
+                                <div className="discount-badge">40% Off</div>
+                            </div>
                         )}
-                        {chips && (
-                        <span className="bg-green-500 text-white px-3 py-1 text-xs font-medium rounded-full">{chips}</span>
-                        )}
+                        {/*{chips && (*/}
+                        {/*    <span className="bg-green-500 text-white text-right px-3 py-1 text-xs font-medium rounded-full">{chips}</span>*/}
+                        {/*)}*/}
                     </div>
                 </div>
 
                 {/* Middle Part */}
-                <div className="flex justify-end p-6 pt-2 pb-0">
+                <div className="flex justify-end p-4 pt-0 pb-0">
                     <button
-                        className="flex items-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition-colors">
+                        className="book-flight-button hover:bg-orange-600 font-medium transition-colors">
                         Book Flight
                         <CircleArrowRight className="w-4 h-4 ml-1"/>
                     </button>
@@ -163,9 +179,9 @@ const FlightCard = ({
 
                     <div className="flex items-center space-x-4">
                         <div className="flex items-center space-x-2">
-                            <span className="text-sm text-gray-600">Redeem Code</span>
-                            <div className="border border-gray-300 rounded px-3 py-1">
-                                <span className="text-sm text-gray-800">TUDSD45F</span>
+                            <span className="text-sm text-black font-semibold">Redeem Code</span>
+                            <div className="redeem-code">
+                                <span className="text-sm text-black">TUDSD45F <img src={copyIcon}/> </span>
                             </div>
                         </div>
                     </div>

@@ -15,13 +15,14 @@ class Enqueue {
 
 	public function tt_assets() {
 			wp_enqueue_style( 'tt-style', TT_ROOT_DIR_URL . 'includes/assets/build/frontend.css' );
-			wp_enqueue_script( 'tt-script', TT_ROOT_DIR_URL . 'includes/assets/build/frontend.js', 'jquery', '0.0.7', true );
+			wp_enqueue_script( 'tt-script', TT_ROOT_DIR_URL . 'includes/assets/build/frontend.js', 'jquery', '1.0.1', true );
 			wp_localize_script(
 				'tt-script',
 				'tt_settings',
 				array(
 					'ajax_url' => admin_url( 'admin-ajax.php' ),
 					'nonce'    => wp_create_nonce( 'tt_nonce' ),
+					'assets_path' => TT_ROOT_DIR_URL . 'includes/assets/',
 				)
 			);
 

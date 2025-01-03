@@ -99,7 +99,7 @@
 .ant-select-dropdown {
     width: 450px !important;
     height: 300px !important;
-    top: 33rem !important;
+    top: 27rem !important;
     box-sizing: border-box;
     border-top: 4px solid rgb(237, 114, 50);
     border-radius: 0px 6px 6px 6px;
@@ -121,4 +121,55 @@
     font-weight: 600;
     font-size: 20px;
     color: #ED7232;
+}
+
+/*Flight Card*/
+
+.book-flight-button {
+    width: 185px;
+    height: 48px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 13px 20px 13px 20px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 2px 0px rgba(15, 23, 42, 0.06);
+    background: #ED7232;
+    color: #ffffff;
+}
+
+.discount-badge {
+    width: 70px;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 9px 2px 9px;
+    box-sizing: border-box;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 18px;
+    background: rgba(34, 197, 94, 0.05);
+    color: #22C55E;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 20px;
+}
+
+.redeem-code {
+    width: 109px;
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 8px 2px 8px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 16px;
+    box-sizing: border-box;
+    border: 1px dashed rgb(203, 213, 225);
+    border-radius: 18px;
 }

@@ -7,6 +7,15 @@ import FlightDate from "./components/FlightDate.jsx";
 import FlightFilters from "./components/FlightFilters.jsx";
 import useFlightStore from "../../flightStore.js";
 
+const getAirlineImagePath = (airlineCode) => {
+    try {
+        return `${tt_settings.assets_path}/airlines/${airlineCode}.png`;
+    } catch (error) {
+        // Return a default image if the airline image is not found
+        return './assets/airlines/default.png';
+    }
+};
+
 export default function SearchResult() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -74,6 +83,8 @@ export default function SearchResult() {
             key={flightData.id} // Add a unique key if available
             airlineName={flightData.headerText}
             flightNumber={flightData.subHeaderTextWeb}
+            airlineCode={flightData.airlineCode}
+            airlineImage={getAirlineImagePath(flightData.airlineCode)}
             price={flightData.displayFare}
             duration={flightData.duration.hour}
             departureTime={flightData.departureTime}
@@ -91,17 +102,17 @@ export default function SearchResult() {
         />
     );
 
-    // Use filtered flights for all cards
+
     const allFlightCards = filteredFlights.map(flight => createFlightCard(flight));
 
-    // Find special flights from filtered results
+
     const cheapestFlight = filteredFlights.find(flight => flight.chips === "CHEAPEST");
     const fastestFlight = filteredFlights.find(flight => flight.chips === "FASTEST");
     const recommendedFlight = filteredFlights.reduce((prev, current) =>
         (current.sort.recommended > prev.sort.recommended) ? current : prev
     );
 
-    // Create cards for special categories
+
     const smartFlightCard = recommendedFlight && createFlightCard(recommendedFlight);
     const cheapestFlightCard = cheapestFlight && createFlightCard(cheapestFlight);
     const quickestFlightCard = fastestFlight && createFlightCard(fastestFlight);
@@ -116,9 +127,36 @@ export default function SearchResult() {
                         minPrice={flightFilter?.minPrice}
                         stops={flights} // Pass all flights for filtering
                     />
+                    {/*<FlightFilters*/}
+                    {/*    totalFlights={100} // Use filtered length*/}
+                    {/*    maxPrice={1230}*/}
+                    {/*    minPrice={3445}*/}
+                    {/*    stops={'1 Stop'} // Pass all flights for filtering*/}
+                    {/*/>*/}
                 </div>
                 <div className="w-full">
                     <FlightDate />
+                    {/*<FlightCard*/}
+                    {/*    // key={flightData.id} // Add a unique key if available*/}
+                    {/*    airlineName={'Air India'}*/}
+                    {/*    flightNumber={'123456A'}*/}
+                    {/*    airlineCode={'AI'}*/}
+                    {/*    airlineImage={getAirlineImagePath('AI')}*/}
+                    {/*    price={'12134'}*/}
+                    {/*    duration={'121212'}*/}
+                    {/*    departureTime={'1212121'}*/}
+                    {/*    arrivalTime={'4454545'}*/}
+                    {/*    origin={'DEL'}*/}
+                    {/*    destination={'67676'}*/}
+                    {/*    stops={'1 Stop'}*/}
+                    {/*    offerText={'Lorem ipsum dollar'}*/}
+                    {/*    isFreeMeal={true}*/}
+                    {/*    cabinClass={'Premium Economy'}*/}
+                    {/*    checkInBaggage={'1 Passenger'}*/}
+                    {/*    handBaggage={'1 bag'}*/}
+                    {/*    seatRemaining={'3 Seats'}*/}
+                    {/*    // chips={}*/}
+                    {/*/>*/}
                     <FlightTabs
                         allFlights={allFlightCards}
                         smartCard={smartFlightCard}
