@@ -6,7 +6,7 @@ const FlightTabs = ({ smartCard, cheapestCard, quickestCard, allFlights }) => {
     const items = [
         {
             key: 'all',
-            label: 'All Flights',
+            label: 'Smart (Recommendation)',
             children: (
                 <div className="space-y-4">
                     {allFlights}
@@ -15,7 +15,7 @@ const FlightTabs = ({ smartCard, cheapestCard, quickestCard, allFlights }) => {
         },
         {
             key: 'recommended',
-            label: 'Recommended',
+            label: 'Best',
             children: smartCard,
         },
         {

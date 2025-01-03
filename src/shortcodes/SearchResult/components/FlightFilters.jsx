@@ -24,6 +24,13 @@ const FlightFilters = ({ totalFlights, maxPrice, minPrice, stops }) => {
         { id: 'night', label: 'Night', subLabel: 'After 6 PM', image: night }
     ];
 
+    const cabinClass = [
+        { id: 'economy', label: 'Economy' },
+        { id: 'premium', label: 'Prem Economy' },
+        { id: 'business', label: 'Business' },
+        { id: 'mixed', label: 'Mixed' },
+    ];
+
     // Initialize store with props data
     useEffect(() => {
         if (stops) {
@@ -89,7 +96,7 @@ const FlightFilters = ({ totalFlights, maxPrice, minPrice, stops }) => {
                                     checked={filters.stops.includes(stop)}
                                     onChange={(e) => handleStopsChange(stop, e.target.checked)}
                                 />
-                                <span>{stop}</span>
+                                <span className="slot-label">{stop}</span>
                             </label>
                         ))}
                     </div>
@@ -97,7 +104,7 @@ const FlightFilters = ({ totalFlights, maxPrice, minPrice, stops }) => {
 
                 {/* Price Range Section */}
                 <Panel header="Flight Price" key="price" className="custom-panel">
-                    <div className="space-y-2">
+                    <div className="-mt-6">
                         <Slider
                             range
                             min={minPrice}
@@ -108,7 +115,7 @@ const FlightFilters = ({ totalFlights, maxPrice, minPrice, stops }) => {
                             trackBg='#ED7232'
                             handleColor='#ED7232'
                         />
-                        <div className="flex justify-between text-sm text-gray-600">
+                        <div className="flex justify-between text-sm text-black">
                             <span>₹{filters.priceRange[0]}</span>
                             <span>₹{filters.priceRange[1]}</span>
                         </div>
@@ -138,6 +145,27 @@ const FlightFilters = ({ totalFlights, maxPrice, minPrice, stops }) => {
                                     checked={filters.timeSlots.includes(slot.id)}
                                     onChange={(e) => handleTimeSlotChange(slot.id, e.target.checked)}
                                 />
+                            </label>
+                        ))}
+                    </div>
+                </Panel>
+
+                {/* Cabin Section */}
+                <Panel header="Cabin" key="cabin" className="custom-panel">
+                    <div className="space-y-2">
+                        {cabinClass.map((slot) => (
+                            <label key={slot.id} className="flex justify-start items-center space-x-3">
+                                <input
+                                    type="checkbox"
+                                    className="rounded border-gray-600 w-4 h-4"
+                                    // checked={filters.cabinClass.includes(slot.id)}
+                                    // onChange={(e) => handleTimeSlotChange(slot.id, e.target.checked)}
+                                />
+                                <div className="flex items-start space-x-2">
+                                    <div>
+                                        <div className="slot-label">{slot.label}</div>
+                                    </div>
+                                </div>
                             </label>
                         ))}
                     </div>

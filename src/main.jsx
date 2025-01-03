@@ -32,6 +32,8 @@ searchResult.forEach(element => {
                         "fontSize": 50,
                         "trackBg": "rgb(237,114,50)",
                         "trackHoverBg": "rgb(237,114,50)",
+                        "railSize": 8,
+                        "handleSize": 18,
                         "dotActiveBorderColor": "rgb(237,114,50)",
                         "dotBorderColor": "rgb(237,114,50)",
                         "handleActiveColor": "rgb(237,114,50)",
